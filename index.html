@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script>
+  (function() {
+    var GA_ID = 'G-5015YJREMQ';
+    var isLocalDev = ['localhost', '127.0.0.1', ''].includes(location.hostname);
+    if (isLocalDev) return;
+    try { if (/[?&]no_ga=0/.test(location.search)) localStorage.removeItem('no_ga'); if (/[?&]no_ga=1/.test(location.search)) localStorage.setItem('no_ga', '1'); if (localStorage.getItem('no_ga') === '1') return; } catch (e) {}
+    var gaQ = new URLSearchParams(location.search); if (gaQ.get('obs') === '1' || gaQ.get('no_ga') === '1') return;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+    document.addEventListener('click', function(e) {
+      var a = e.target && e.target.closest ? e.target.closest('a[href*="booth.pm"]:not([href*="/search"])') : null;
+      if (!a) return;
+      gtag('event', 'booth_click', { link_url: a.href, link_id: a.id || '', link_text: (a.textContent || '').trim().slice(0, 40) });
+    });
+  })();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="集金表のテンプレートを無料で作成・印刷。名簿を貼るだけで、町内会費・PTA・子ども会の集金表(受け取った日を書き、印を押せる欄つき)ができます。毎月・年2回などの集金にも、配る「集金のお知らせ」の例文にも対応。スマホで作って画像保存→コンビニのプリントでも印刷できます。登録不要。">
+<link rel="canonical" href="https://uuhai0625.github.io/shukin-hyo/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="集金表メーカー|町内会費・PTA・子ども会の集金表テンプレート無料(集金のお知らせ例文つき)">
+<meta property="og:description" content="集金表のテンプレートを無料で作成・印刷。名簿を貼るだけで、町内会費・PTA・子ども会の集金表(受け取った日を書き、印を押せる欄つき)ができます。毎月・年2回などの集金にも、配る「集金のお知らせ」の例文にも対応。スマホで作って画像保存→コンビニのプリントでも印刷できます。登録不要。">
+<meta property="og:url" content="https://uuhai0625.github.io/shukin-hyo/">
+<meta property="og:image" content="https://uuhai0625.github.io/shukin-hyo/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>集金表メーカー|町内会費・PTA・子ども会の集金表テンプレート無料(集金のお知らせ例文つき)</title>
+<style>
+  :root {
+    --bg: #f4f5f8;
+    --panel: #ffffff;
+    --border: #d6dae3;
+    --field-border: #4a5163;
+    --text: #1e2230;
+    --muted: #4d5466;
+    --accent: #2f5a8f;
+    --accent-dark: #233f66;
+    --ng: #b3261e;
+    --locked: #c8d0de;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  header { background: var(--accent-dark); color: #fff; padding: 24px 20px 18px; text-align: center; }
+  header h1 { margin: 0 0 6px; font-size: 1.35rem; }
+  header p { margin: 0; font-size: .9rem; }
+  main { max-width: 1120px; margin: 0 auto; padding: 22px 16px 50px; }
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); grid-template-areas: "nm pv" "opt pv"; column-gap: 18px; align-items: start; }
+  .layout > * { min-width: 0; }
+  #nm-card { grid-area: nm; } #opt-card { grid-area: opt; }
+  #pv-card { grid-area: pv; position: sticky; top: 12px; }
+  section.card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin-bottom: 18px; }
+  section.card h2 { margin: 0 0 6px; font-size: 1.05rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .fine { color: var(--muted); font-size: .86rem; margin: 8px 0 0; }
+  .badge { display: inline-block; font-size: .7rem; padding: 2px 8px; border-radius: 999px; background: #e3e9f3; color: #233f66; font-weight: bold; }
+  .hidden { display: none !important; }
+  label.field, div.field { display: block; margin-bottom: 12px; }
+  .lbl { font-size: .9rem; font-weight: bold; display: block; }
+  .hint { font-size: .875rem; color: var(--muted); font-weight: normal; display: block; margin-top: 2px; }
+  select, input[type=text], textarea { margin-top: 5px; min-height: 44px; border: 1px solid var(--field-border); border-radius: 8px; font-size: 1rem; font-family: inherit; background: #fff; color: var(--text); width: 100%; padding: 8px 10px; }
+  textarea { min-height: 190px; resize: vertical; line-height: 1.5; }
+  textarea.short { min-height: 90px; }
+  .row2 { display: flex; gap: 12px; }
+  .row2 > * { flex: 1; min-width: 0; }
+  .chk { display: flex; align-items: center; gap: 8px; min-height: 44px; font-size: .92rem; cursor: pointer; }
+  .chk input { width: 20px; height: 20px; accent-color: var(--accent); flex: none; }
+  .chks { display: flex; flex-wrap: wrap; column-gap: 18px; }
+  .modes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+  .modes label { display: flex; align-items: center; gap: 6px; min-height: 44px; padding: 6px 12px; border: 1px solid var(--field-border); border-radius: 8px; cursor: pointer; font-size: .92rem; background: #fff; }
+  .modes input { width: 18px; height: 18px; accent-color: var(--accent); }
+  .btn-row { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+  .btn { min-height: 44px; min-width: 44px; padding: 9px 16px; border-radius: 8px; font-size: .9rem; cursor: pointer; border: 1px solid var(--field-border); background: #fff; color: var(--text); font-family: inherit; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: bold; }
+  .btn.small { padding: 6px 12px; font-size: .85rem; }
+  .btn:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid #c2410c; outline-offset: 2px; }
+  .btn-row .btn { flex: 1; }
+  .status { font-size: .88rem; color: var(--muted); margin-top: 6px; min-height: 1.2em; }
+  .status.err { color: var(--ng); font-weight: bold; }
+  .status:empty { min-height: 0; margin: 0; }
+  .pv { border: 1px solid var(--border); border-radius: 8px; background: #e1e5ec; padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .pv canvas { width: 100%; height: auto; display: block; box-shadow: 0 1px 4px rgba(0,0,0,.25); background: #fff; }
+  .guide { font-size: .9rem; }
+  .guide h3 { font-size: .95rem; margin: 14px 0 4px; }
+  .guide ul, .guide ol { padding-left: 1.3em; margin: 6px 0; }
+  .guide li { margin: 4px 0; }
+  .locked-panel { border: 1px dashed var(--locked); border-radius: 10px; padding: 16px; text-align: center; color: var(--muted); background: #f8f9fb; }
+  .locked-panel .lead { color: var(--text); font-weight: bold; }
+  .locked-panel .feat-list { text-align: left; max-width: 620px; margin: 10px auto; font-size: .88rem; padding-left: 1.2em; }
+  .buy-btn { display: inline-block; margin-top: 8px; background: var(--accent-dark); color: #fff; font-weight: bold; padding: 11px 22px; border-radius: 999px; text-decoration: none; font-size: .9rem; }
+  footer { max-width: 1120px; margin: 0 auto; padding: 0 16px 40px; font-size: .84rem; color: var(--muted); }
+  footer p { margin: 10px 0; }
+  footer a { color: var(--muted); display: inline-block; padding: 4px 0; }
+  #printArea { display: none; }
+  .jump { display: none; margin-top: 6px; font-size: .95rem; padding: 10px 0; }
+  @media (min-width: 861px) {
+    .pv canvas { max-height: calc(100vh - 260px); width: auto; max-width: 100%; }
+  }
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: minmax(0, 1fr); grid-template-areas: "nm" "pv" "opt"; }
+    #pv-card { position: static; }
+    .jump { display: inline-block; }
+  }
+  @media (max-width: 600px) {
+    .row2 { flex-direction: column; gap: 0; }
+    section.card { padding: 16px 12px; }
+    .pv { padding: 4px; }
+  }
+  @media print {
+    body.printing > * { display: none !important; }
+    body.printing > #printArea { display: block !important; }
+    #printArea img { display: block; break-after: page; }
+    #printArea img:last-child { break-after: auto; }
+    body:not(.printing) > * { display: none !important; }
+    body:not(.printing)::after { content: "集金表は、ページの「印刷する」ボタンから印刷してください。"; display: block; padding: 20mm; font-size: 14pt; }
+  }
+</style>
+<style id="pageStyle">@page { size: A4 portrait; margin: 0; }</style>
+<!--ANSHIN_CSS_START--><style>:root{--anshin-w:1088px;--anshin-pad:16px}.anshin-strip,.anshin{box-sizing:border-box;width:min(var(--anshin-w),calc(100% - 2 * var(--anshin-pad)));margin-left:auto;margin-right:auto}.anshin-strip{list-style:none;margin-top:10px;margin-bottom:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;font-size:.8rem;line-height:1.5}.anshin-strip li{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border:1px solid rgba(20,120,90,.45);border-radius:999px;background:rgba(20,120,90,.07)}.anshin-strip li.anshin-more{border:0;background:none;padding:3px 2px}.anshin-strip a,.anshin a{color:inherit}.anshin{margin-top:18px;margin-bottom:18px;padding:14px 18px;border:1px solid rgba(20,120,90,.45);border-radius:10px;background:rgba(20,120,90,.05);font-size:.86rem;line-height:1.7}.anshin h2{font-size:1rem;margin:0 0 6px}.anshin p{margin:0 0 6px}.anshin ul{margin:0;padding-left:1.2em}.anshin li{margin:3px 0}.anshin details{margin-top:6px}.anshin summary{cursor:pointer;font-weight:bold}.anshin .anshin-meta{margin:8px 0 0;font-size:.8rem;opacity:.85}@media print{.anshin,.anshin-strip{display:none!important}}</style><!--ANSHIN_CSS_END-->
+<!--UPSELL_CSS_START--><style>.upsell-top{box-sizing:border-box;width:min(var(--anshin-w,880px),calc(100% - 2 * var(--anshin-pad,16px)));margin:12px auto 0;font-size:.85rem;line-height:1.6}.upsell-top a{color:inherit}.upsell-assure{list-style:none;margin:12px 0 10px;padding:0;display:flex;flex-wrap:wrap;gap:6px 8px;font-size:.8rem;line-height:1.5}.upsell-assure li{padding:3px 10px;border:1px solid rgba(20,120,90,.45);border-radius:12px;background:rgba(20,120,90,.06)}.upsell-terms{margin:8px 0 0;font-size:.78rem;line-height:1.6;opacity:.85}.upsell-toast{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:9999;box-sizing:border-box;width:min(520px,calc(100% - 24px));padding:14px 56px 14px 16px;border-radius:12px;background:#fff;color:#222;border:1px solid #c9c2d6;box-shadow:0 6px 24px rgba(0,0,0,.18);font-size:.88rem;line-height:1.6}.upsell-toast p{margin:0 0 6px;font-weight:bold}.upsell-toast ul{margin:0 0 10px;padding-left:1.2em}.upsell-toast li{margin:2px 0}.upsell-toast .upsell-note{display:block;margin-top:6px;font-size:.75rem;color:#555}.upsell-toast .upsell-go{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:8px;background:#c9283e;color:#fff;font-weight:bold;text-decoration:none}.upsell-toast .upsell-go:focus-visible,.upsell-toast .upsell-x:focus-visible{outline:3px solid #2560c4;outline-offset:2px}.upsell-toast .upsell-x{position:absolute;top:4px;right:4px;width:44px;height:44px;border:0;border-radius:8px;background:transparent;color:#555;font-size:1.3rem;line-height:1;cursor:pointer}.upsell-inline{white-space:nowrap;color:inherit;text-decoration:underline;text-underline-offset:2px}@media print{.upsell-top,.upsell-assure,.upsell-terms,.upsell-toast,.upsell-inline{display:none!important}}</style><!--UPSELL_CSS_END-->
+</head>
+<body>
+
+<header>
+  <h1>集金表メーカー</h1>
+  <p>名簿を貼るだけで、町内会費・PTA・子ども会などの集金表(受け取った日を書き、印を押せる欄つき)を作って印刷できます。毎月・年2回などの集金にも、配る「集金のお知らせ」にも。登録不要・スマホでも使えます。</p>
+</header>
+<!--ANSHIN_STRIP_START-->
+<ul class="anshin-strip" aria-label="データの扱い">
+  <li><span aria-hidden="true">✓</span> 入力内容はこの端末の中だけで処理</li>
+  <li><span aria-hidden="true">✓</span> 登録・ログイン不要</li>
+  <li><span aria-hidden="true">✓</span> 仕組みを公開中</li>
+  <li class="anshin-more"><a href="#anshin">データの扱いをくわしく</a></li>
+</ul>
+<!--ANSHIN_STRIP_END-->
+<!--UPSELL_TOP_START--><p class="upsell-top no-print" id="upsellTop">このページは無料のまま使えます。機能を増やしたい方は <a href="#pro-section">買い切り版(¥100・1回払い)<span aria-hidden="true"> ↓</span></a></p><!--UPSELL_TOP_END-->
+
+<main>
+<div class="layout">
+
+  <section class="card" id="nm-card">
+    <h2>名簿</h2>
+    <label class="field"><span class="lbl">名前(1行に1つ・集める順に)</span><textarea id="inNames" maxlength="20000" spellcheck="false" placeholder="例:&#10;山田&#10;佐藤&#10;101号室 鈴木&#10;高橋" aria-describedby="nmHint"></textarea></label>
+    <span class="hint" id="nmHint"></span>
+    <a class="jump" href="#pv-card">見本へ ↓</a>
+  </section>
+
+  <section class="card" id="opt-card">
+    <h2>集金の内容</h2>
+    <fieldset class="field" style="border:0;padding:0;margin:0 0 12px"><legend class="lbl">作るもの</legend>
+      <div class="modes">
+        <label><input type="radio" name="mode" value="hyo" checked> 集金表</label>
+        <label><input type="radio" name="mode" value="oshirase"> 集金のお知らせ</label>
+        
+      </div>
+    </fieldset>
+    <div class="row2">
+      <label class="field"><span class="lbl">集金の名前</span><input type="text" id="inTitle" maxlength="24" placeholder="例: 町内会費"><span class="hint" id="titleHint">空欄なら見出しは「集金表」「集金のお知らせ」だけになります</span></label>
+      <label class="field"><span class="lbl">町内会・班の名前</span><input type="text" id="inGroup" maxlength="30" placeholder="例: さくら町内会 3班"><span class="hint">空欄でもかまいません</span></label>
+    </div>
+    <div class="row2">
+      <label class="field"><span class="lbl">1回の金額(円)</span><input type="text" id="inAmount" inputmode="numeric" maxlength="9" placeholder="例: 500" aria-describedby="amtHint"><span class="hint" id="amtHint">空欄なら、お知らせなどの金額は手書きの欄になります(集金表には金額が入りません)</span></label>
+      <label class="field"><span class="lbl">集める回数</span><select id="inTimes"><option value="1">1回(年1回など)</option><option value="2">2回(上期・下期など)</option><option value="3">3回</option><option value="4">4回(3か月ごとなど)</option><option value="6">6回(2か月ごと)</option><option value="12" selected>12回(毎月)</option></select></label>
+    </div>
+    <label class="field"><span class="lbl">最初に集める月</span><select id="inStart"><option value="0">月を入れない(1回目・2回目…)</option><option value="1">1月</option><option value="2">2月</option><option value="3">3月</option><option value="4" selected>4月</option><option value="5">5月</option><option value="6">6月</option><option value="7">7月</option><option value="8">8月</option><option value="9">9月</option><option value="10">10月</option><option value="11">11月</option><option value="12">12月</option></select><span class="hint">12回なら4月〜3月、2回なら4月・10月のように、回数に合わせて間をあけます。学期ごとなど間が決まっていないときは「月を入れない」を選んでください</span></label>
+    <div id="hyoOpts">
+      <div class="chks">
+        <label class="chk"><input type="checkbox" id="colTotal" checked> 合計の行</label>
+        <label class="chk"><input type="checkbox" id="colNote" checked> 備考の欄</label>
+      </div>
+    </div>
+    <label class="field" id="blankField"><span class="lbl">名前が空のときの数</span><select id="inBlank"><option value="10">10</option><option value="15" selected>15</option><option value="20">20</option></select><span class="hint">名前を入れないと、手書き用の空欄になります</span></label>
+    <div id="noticeOpts" class="hidden">
+      <div class="row2">
+        <label class="field"><span class="lbl">集金する日</span><input type="text" id="inDate" maxlength="30" placeholder="例: 4月20日(日)の午前中"></label>
+        <label class="field"><span class="lbl">集め方</span><input type="text" id="inHow" maxlength="40" placeholder="例: 班長が各家に伺います"></label>
+      </div>
+      <label class="field"><span class="lbl">お知らせの本文</span><textarea id="inBody" class="short" maxlength="200" spellcheck="false" aria-describedby="bodyHint"></textarea></label>
+      <span class="hint" id="bodyHint" style="margin:-8px 0 12px">200文字・12行まで。改行もそのまま入ります。長いときは文字を小さくして1枚に収めます</span>
+    </div>
+    <div class="row2" id="issuerRow">
+      <label class="field"><span class="lbl">出す人(会の名前・係)</span><input type="text" id="inIssuer" maxlength="30" placeholder="例: さくら町内会 会計 山田"><span class="hint" id="issuerHint">集金表の「集金係」と、お知らせに入ります</span></label>
+      <label class="field" id="contactField"><span class="lbl">問い合わせ先</span><input type="text" id="inContact" maxlength="40" placeholder="例: 3班 班長 山田"><span class="hint">空欄でもかまいません</span></label>
+    </div>
+    
+    <label class="field"><span class="lbl">色</span><select id="inColor"><option value="mono" selected>白黒(インクを節約)</option><option value="blue">青</option><option value="green">緑</option><option value="brown">茶</option></select></label>
+    <div class="btn-row" style="justify-content:flex-end"><button type="button" class="btn small" id="clearBtn" style="flex:none">入力を全部消す</button></div>
+    <a class="jump" href="#pv-card">↑ 見本・印刷へ</a>
+  </section>
+
+  <section class="card" id="pv-card">
+    <h2>見本・印刷</h2>
+    <p class="status" id="sumNote"></p>
+    <p class="status" id="warnNote" role="status"></p>
+    <label class="field hidden" id="pageField"><span class="lbl">見本のページ</span><select id="inPage"></select></label>
+    <div class="btn-row" style="margin-top:0">
+      <button type="button" class="btn primary" id="printBtn">印刷する</button>
+      <button type="button" class="btn" id="pngBtn">画像で保存</button>
+    </div>
+    <div class="status" id="outSt" role="status"></div>
+    <div class="pv" id="pv"></div>
+    <div class="btn-row" style="margin-top:6px"><button type="button" class="btn small" id="bigBtn">見本を大きく見る(新しいタブ)</button></div>
+    <p class="fine">A4縦で印刷します。パソコンでは倍率を「100%」に。画像で保存すると、コンビニのプリントでも印刷できます。</p>
+    <a class="jump" href="#opt-card">集金の内容へ ↓</a>
+  </section>
+
+</div>
+
+  <section class="card guide" id="guide">
+    <h2>集金表の作り方</h2>
+    <ol>
+      <li>集める順に、名前を1行に1つずつ入れます(名字だけ・部屋番号だけでもかまいません)。名簿を貼り付けてもかまいません。「1. 山田」「2. 佐藤」のように1から順に番号がついているときは、番号を外して読みます。</li>
+      <li>集金の名前と1回の金額を入れ、集める回数と最初に集める月を選びます。</li>
+      <li>「集金表」を選んで印刷します。集めたら、その回の欄に受け取った日を書き、印を押します。</li>
+      <li>配る紙がいるときは「集金のお知らせ」を選び、集金する日・集め方・本文を入れて印刷します。</li>
+    </ol>
+    <h3>よくある質問</h3>
+    <ul>
+      <li id="faqPhone"></li>
+      <li id="faqCount"></li>
+      <li><strong>手書き用の空欄の表は?</strong> 名前を入れずに印刷すると、名前の欄が空欄の表になります。行の数は10・15・20行から選べます。</li>
+      <li><strong>金額の計算は?</strong> 金額を入れると、表の上に「1回 ◯円 × ◯回 = 合計 ◯円」が入ります(1回のときは「1回 ◯円」だけ)。集めた額の合計は、合計の行に手で書き込みます。</li>
+      <li><strong>世帯ごとに金額が違うときは?</strong> 金額を空欄にして作ってください。集金表には金額が入らず、お知らせと集金袋の金額は手書きの欄になります。世帯ごとの金額や、途中から入った世帯・免除は、集金表の備考の欄に書いてください。</li>
+      <li><strong>12回(毎月)の表に印鑑は押せる?</strong> 12回はマスが小さい(約1cm角)ので、受け取った日だけ書くか、小さな印やサインがおすすめです。印鑑をしっかり押すなら、6回以下の表が向いています。</li>
+      <li><strong>入れた名前はどこかに送られる?</strong> どこにも送られません。すべてこのブラウザの中で処理し、このブラウザにだけ自動で保存します。共用のパソコンやスマホでは、使い終わったら「入力を全部消す」を押し、「見本を大きく見る」で開いたタブを閉じ、保存した画像もダウンロードしたフォルダから消してください。</li>
+    </ul>
+  </section>
+
+  <section class="card" id="pro-section">
+    <h2>領収書をまとめて印刷 <span class="badge">買い切り版 ¥100(税込)</span></h2>
+    <div class="locked-panel">
+      <p class="lead">名簿から、控えつきの領収書を一度に。</p>
+      <p>このページの機能は無料でそのまま使えます。買い切り版(ダウンロード購入)では、次の機能が増えます:</p>
+      <ul class="feat-list">
+        <li><strong>領収書(控えつき)を名簿からまとめて印刷</strong>: A4に4枚、通し番号・宛名・金額・但し書き・出す人入り。宛名・金額・番号を1枚ずつ書かなくてすみます(日付と印は手書き)</li>
+        <li><strong>複数の班をまとめて作成</strong>: 班ごとに名前の前に「■1班」「■2班」のような行を入れると、班ごとに集金表とお知らせを分けて作ります(30班まで。無料版は1つの班だけ)</li>
+        <li><strong>1つの班60件まで</strong>(無料版は20件まで)</li>
+        <li><strong>ツール名が入りません</strong>(無料版は用紙の右下に小さく入ります)</li>
+        <li><strong>2枚以上の画像はZIPファイル1つにまとめて保存</strong></li>
+        <li><strong>パソコンで使うHTMLファイルです</strong>(スマホでの動作は保証していません)。ダウンロードしたファイルなので、ネットにつながっていなくても開けます</li>
+      </ul>
+<!--UPSELL_ASSURE_START--><ul class="upsell-assure" aria-label="買い切り版について"><li>¥100(税込)の1回払い・月額なし</li><li>パソコン向けのHTMLファイル(スマホでは開けない機種あり)</li><li>ネットにつながっていなくても動く</li><li>BOOTHで購入(クレジットカード・楽天ペイは手数料なし、コンビニ・銀行払いは別途手数料)</li></ul><!--UPSELL_ASSURE_END-->
+      <a class="buy-btn" href="https://uuhai0625.booth.pm/items/9183158" id="buyLink" target="_blank" rel="noopener">パソコン用の買い切り版を見る(BOOTH・新しいタブ)</a><!--UPSELL_TERMS_START--><p class="upsell-terms">販売者の情報・返品などの販売条件は、BOOTHの商品ページでご確認ください。BOOTHでの購入にはpixivのアカウントが必要です。</p><!--UPSELL_TERMS_END-->
+    </div>
+  </section>
+
+</main>
+
+<!--ANSHIN_START-->
+<section class="anshin" id="anshin" aria-labelledby="anshin-title">
+  <h2 id="anshin-title">データの扱いについて</h2>
+  <p>このページには、入力した内容を受け取る仕組みがありません。入力した文字や数字は、あなたのスマホやパソコンの中だけで処理されます。</p>
+  <ul>
+    <li>会員登録・ログイン・メールアドレスの入力はありません。</li>
+    <li>自分で確かめたい方へ: ページを開いたあと機内モードにしても、そのまま使えます。</li>
+  </ul>
+  <details>
+    <summary>もっとくわしく(保存・アクセス解析・公開について)</summary>
+    <ul>
+      <li>保存されるデータは、この端末のこのブラウザの中にだけ残ります(localStorage・sessionStorage)。共用のパソコンでは使い終わったら消してください。</li>
+      <li>アクセス解析(Google Analytics)のため、見たページのURL・参照元・端末やブラウザの種類・おおよその地域(IPアドレスから推定)・Cookieの識別子・BOOTHへのリンクのクリック・どのボタンを押したか(回数や選んだ設定を含む)がGoogleに送られます。目的は利用状況の把握です。入力した文字や画像は送りません。(<a href="https://policies.google.com/technologies/partner-sites?hl=ja" target="_blank" rel="noopener">Googleによるデータの使用</a>/<a href="https://tools.google.com/dlpage/gaoptout?hl=ja" target="_blank" rel="noopener">計測を止めるアドオン</a>。止めてもツールはそのまま使えます)</li>
+      <li>金額・名前は、配る前に会計の方などがご確認ください。会計の正式な記録は、会の決まりに合わせて残してください。</li>
+      <li>処理の中身はすべて公開しています(詳しい方向け: <a href="https://github.com/uuhai0625/shukin-hyo" target="_blank" rel="noopener">GitHub</a>)。</li>
+    </ul>
+  </details>
+  <p class="anshin-meta">作っている人: ウーハイ(個人開発)/不具合・ご質問は<a href="https://x.com/uuhai0625" target="_blank" rel="noopener">X(@uuhai0625)</a>へ/<a href="https://uuhai0625.github.io/" target="_blank" rel="noopener">ほかのツール</a>/この説明の更新日: 2026-11-20</p>
+</section>
+<!--ANSHIN_END-->
+
+<footer>
+  <p id="privacyNote">入力した内容はどこにも送信されません(すべてこのブラウザの中で処理し、このブラウザにだけ自動で保存します)。</p>
+  <p><a href="https://uuhai0625.booth.pm/" target="_blank" rel="noopener">ほかのツールも見る(BOOTHショップ)</a></p>
+  <p>不具合・ご要望は X <a href="https://x.com/uuhai0625" target="_blank" rel="noopener">@uuhai0625</a> まで。</p>
+  <p class="related-tools no-print">関連する無料ツール: <a href="https://uuhai0625.github.io/kairanban-junban/" target="_blank" rel="noopener">回覧板の順番表メーカー</a> ・ <a href="https://uuhai0625.github.io/touban-hyo/" target="_blank" rel="noopener">回る当番表メーカー</a> ・ <a href="https://uuhai0625.github.io/#free-tools">ツール一覧</a></p>
+</footer>
+
+<div id="printArea"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  var EDITION = "free"; // "full" で買い切り完全版
+
+  function track(name, params) {
+    if (!window.dataLayer) return;
+    (function () { window.dataLayer.push(arguments); })("event", name, params || {});
+  }
+  var $ = function (id) { return document.getElementById(id); };
+  function setSt(id, msg, err) { var e = $(id); if (!e) return; if (e.textContent !== msg) e.textContent = msg; e.classList.toggle("err", !!err); }
+
+  var CREDIT = true, MAXN = 20, MAXG = 1, RYOSHU = false;
+  
+  var STORE = EDITION === "full" ? "uuhai-shukin-v1-full" : "uuhai-shukin-v1";
+  var FONT = '"BIZ UDPGothic", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif';
+  var THEMES = { mono: ["#222222", "#f0f0f0"], blue: ["#2f5a8f", "#e8eef7"], green: ["#3d6b3a", "#e8f1e6"], brown: ["#7a4f2a", "#f4ece3"] };
+  var DEF_BODY = "日ごろより会の活動にご協力いただき、ありがとうございます。下記のとおり集金いたします。お手数ですが、おつりのないようご用意くださいますようお願いいたします。";
+  var LINE = "#666666", FAINT = "#777777";
+
+  // ===== 入力 =====
+  function clip(s, n) { return Array.from(String(s || "").trim()).slice(0, n).join(""); }
+  function isCircled(ch) { var c = ch.charCodeAt(0); return (c >= 0x2460 && c <= 0x2473) || (c >= 0x3251 && c <= 0x325F) || (c >= 0x32B1 && c <= 0x32BF); }
+  var NUM_RE = /^(\d{1,3})(?:\s*(?:\.(?!\d)|[)、:,])\s*|\s*\t\s*|\s+)(\S[\s\S]*)$/;
+  // 名前の行を読む。「■3班」「【3班】」の行は班の見出し
+  function parse() {
+    var rows = [];
+    $("inNames").value.split(/\r?\n/).forEach(function (line) {
+      var t = line.replace(/[\u200B-\u200D\uFEFF\u00AD\u2060\u202A-\u202E\u2066-\u2069]/g, "");
+      t = t.replace(/^\s+/, "");
+      if (t && isCircled(t.charAt(0))) t = t.slice(1);
+      t = t.normalize("NFKC").replace(/\t+$/, "").trim();
+      if (!t) return;
+      var h = t.match(/^■\s*(.*)$/) || t.match(/^【(.*)】$/);
+      if (h) rows.push({ head: clip(h[1], 20) }); else rows.push({ name: t });
+    });
+    // 名前の行がすべて1から順の番号で始まるときだけ、番号を外す(班の見出しのあとは1から数え直してもよい)
+    var numbered = rows.some(function (r) { return r.name; }), want = 1, afterHead = false;
+    rows.forEach(function (r) {
+      if (!numbered) return;
+      if (r.head !== undefined) { afterHead = true; return; }
+      var m = r.name.match(NUM_RE);
+      if (!m || (+m[1] !== want && !(afterHead && +m[1] === 1))) { numbered = false; return; }
+      want = +m[1] + 1; afterHead = false;
+    });
+    var groups = [], cur = null, long = false;
+    rows.forEach(function (r) {
+      if (r.head !== undefined) { cur = { name: r.head, names: [] }; groups.push(cur); return; }
+      var t = numbered ? r.name.match(NUM_RE)[2] : r.name;
+      t = t.replace(/\t+/g, " ").trim();
+      if (Array.from(t).length > 20) long = true;
+      if (!cur) { cur = { name: "", names: [] }; groups.push(cur); }
+      cur.names.push(clip(t, 20));
+    });
+    var empty = groups.filter(function (g) { return !g.names.length; }).map(function (g) { return g.name || "■"; });
+    return { groups: groups.filter(function (g) { return g.names.length; }), long: long, empty: empty };
+  }
+  function amountOf(v) { var t = String(v || "").normalize("NFKC").replace(/[,円\s]/g, ""); if (!/^\d{1,7}$/.test(t)) return t ? -1 : 0; return parseInt(t, 10); }
+  function modeOf() { var r = document.querySelector('input[name="mode"]:checked'); var m = r ? r.value : "hyo"; if (m === "ryoshu" && !RYOSHU) m = "hyo"; return m; }
+  function monthLabels(times, start) {
+    var out = [], step = 12 / times;
+    for (var i = 0; i < times; i++) out.push(start ? ((start - 1 + Math.round(step * i)) % 12 + 1) + "月" : (i + 1) + "回目");
+    return out;
+  }
+  function conf() {
+    var P = parse(), cut = [], gcut = Math.max(0, P.groups.length - MAXG), gcutName = gcut ? P.groups[MAXG].name : "";
+    var groups = P.groups.slice(0, MAXG).map(function (g) {
+      if (g.names.length > MAXN) cut.push({ g: g.name, first: g.names[MAXN], n: g.names.length - MAXN });
+      return { name: g.name, names: g.names.slice(0, MAXN) };
+    });
+    var blank = !groups.length;
+    if (blank) { var bn = parseInt($("inBlank").value, 10) || 15; if (modeOf() === "ryoshu") bn = Math.ceil(bn / 4) * 4; var arr = []; for (var i = 0; i < bn; i++) arr.push(""); groups = [{ name: "", names: arr }]; }
+    var times = parseInt($("inTimes").value, 10) || 12, start = parseInt($("inStart").value, 10) || 0, amt = amountOf($("inAmount").value);
+    var noRaw = String(($("inNo") || {}).value || "1").normalize("NFKC").trim(), noOk = /^\d{1,5}$/.test(noRaw) && +noRaw >= 1;
+    var nTotal = 0; groups.forEach(function (g) { nTotal += g.names.length; });
+    var no = noOk ? Math.min(+noRaw, Math.max(1, 99999 - nTotal + 1)) : 1;
+    return {
+      mode: modeOf(), title: clip($("inTitle").value, 24), group: clip($("inGroup").value, 30),
+      amount: amt > 0 ? amt : 0, badAmount: amt < 0, zeroAmount: amt === 0 && /^[0]+$/.test(String($("inAmount").value).normalize("NFKC").replace(/[,円\s]/g, "")), times: times, start: start, labels: monthLabels(times, start),
+      date: clip($("inDate").value, 30), how: clip($("inHow").value, 40), body: Array.from($("inBody").value.replace(/\r/g, "").replace(/\n\s*\n(\s*\n)+/g, "\n\n")).slice(0, 200).join("").trim().split("\n").slice(0, 12).join("\n"), issuer: clip($("inIssuer").value, 30), contact: clip($("inContact").value, 40),
+      no: no, badNo: !noOk && noRaw !== "", noShift: noOk && no !== +noRaw, rAmount: $("inRAmount") ? $("inRAmount").value : "one",
+      groups: groups, blank: blank, cut: cut, gcut: gcut, gcutName: gcutName, empty: P.empty, long: P.long,
+      cols: { total: $("colTotal").checked, note: $("colNote").checked },
+      theme: THEMES[$("inColor").value] || THEMES.mono
+    };
+  }
+  function yen(n) { return n.toLocaleString("ja-JP") + "円"; }
+  function groupLine(C, g) { if (g.name && C.group.slice(-g.name.length) === g.name) return C.group; return (C.group + (C.group && g.name ? " " : "") + g.name).trim(); }
+
+  // ===== 描画 =====
+  var NO_HEAD = "、。,.)」』】〕!?！？ーぁぃぅぇぉっゃゅょァィゥェォッャュョ…";
+  function wrap(ctx, text, maxW) {
+    var lines = [], cur = "";
+    Array.from(text).forEach(function (ch) { if (ctx.measureText(cur + ch).width > maxW && cur && NO_HEAD.indexOf(ch) < 0) { lines.push(cur); cur = ch; } else cur += ch; });
+    if (cur) lines.push(cur);
+    return lines.length ? lines : [""];
+  }
+  function fitFont(ctx, text, maxW, size, bold) {
+    var s = size; ctx.font = (bold ? "bold " : "") + s + "px " + FONT;
+    while (s > 2 && ctx.measureText(text).width > maxW) { s *= 0.92; ctx.font = (bold ? "bold " : "") + s + "px " + FONT; }
+    return s;
+  }
+  function line(ctx, x1, y1, x2, y2, col, w, dash) { ctx.strokeStyle = col; ctx.lineWidth = w; ctx.setLineDash(dash || []); ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); ctx.setLineDash([]); }
+  var M = 12, HEAD_H = 11;
+
+  function layout(C) {
+    var pages = [];
+    if (C.mode === "ryoshu") {
+      var all = [], no = C.no;
+      C.groups.forEach(function (g) { g.names.forEach(function (n) { all.push({ name: n, g: g, no: no++ }); }); });
+      for (var i = 0; i < all.length; i += 4) pages.push({ kind: "ryoshu", W: 210, H: 297, items: all.slice(i, i + 4) });
+      return { pages: pages };
+    }
+    if (C.mode === "oshirase") {
+      C.groups.forEach(function (g) { var pg = { kind: "oshirase", W: 210, H: 297, g: g }; pg.s = fitOshirase(C, pg); pages.push(pg); });
+      return { pages: pages };
+    }
+    var W = 210, H = 297;
+    C.groups.forEach(function (g) {
+      var top = M + 25, extra = C.cols.total ? 1 : 0, avail = H - M - 8 - top - HEAD_H;
+      var perPage = Math.max(1, Math.floor(avail / 9) - extra), n = g.names.length;
+      var nPages = Math.ceil(n / perPage), per = Math.ceil(n / nPages), rowH = Math.min(14, avail / (per + extra));
+      for (var p = 0; p < nPages; p++) pages.push({ kind: "hyo", W: W, H: H, g: g, idx: p, of: nPages, start: p * per, rows: g.names.slice(p * per, p * per + per), top: top, rowH: rowH, last: p === nPages - 1 });
+    });
+    return { pages: pages };
+  }
+  function credit(ctx, W, H) { if (CREDIT) { ctx.fillStyle = "#8a8a8a"; ctx.font = "2.4px " + FONT; ctx.textAlign = "right"; ctx.textBaseline = "alphabetic"; ctx.fillText("集金表メーカー", W - 12, H - 8); } }
+  function drawHyo(ctx, C, pg) {
+    var W = pg.W, H = pg.H, col = C.theme[0], gl = groupLine(C, pg.g);
+    ctx.textAlign = "center"; ctx.textBaseline = "alphabetic"; ctx.fillStyle = col;
+    var title = (C.title ? C.title + " " : "") + "集金表", tag = pg.of > 1 ? (pg.idx + 1) + "/" + pg.of + "ページ" : "";
+    ctx.font = "3.4px " + FONT; var tagW = tag ? ctx.measureText(tag).width + 3 : 0;
+    fitFont(ctx, title, W - 2 * M - 2 * Math.max(20, tagW), 7.5, true); ctx.fillText(title, W / 2, M + 7);
+    if (tag) { ctx.textAlign = "right"; ctx.font = "3.4px " + FONT; ctx.fillStyle = "#444"; ctx.fillText(tag, W - M, M + 2); }
+    ctx.textAlign = "left"; ctx.fillStyle = "#222";
+    var info = (gl ? gl + "　" : "") + (C.amount ? "1回 " + yen(C.amount) + (C.times > 1 ? " × " + C.times + "回 = 合計 " + yen(C.amount * C.times) : "") : "");
+    if (info) { fitFont(ctx, info, W - 2 * M - 60, 4.2, false); ctx.fillText(info, M, M + 16); }
+    ctx.textAlign = "right"; ctx.font = "4px " + FONT; ctx.fillText("集金係", W - M - 42, M + 16); line(ctx, W - M - 40, M + 16.8, W - M, M + 16.8, LINE, 0.3);
+    if (C.issuer) { ctx.textAlign = "left"; fitFont(ctx, C.issuer, 39, 3.6, false); ctx.fillText(C.issuer, W - M - 40, M + 15.6, 39); }
+    if (C.times >= 6) { ctx.textAlign = "left"; ctx.fillStyle = "#444"; ctx.font = "3.2px " + FONT; ctx.fillText("受け取ったら、その" + (C.start ? "月" : "回") + "のマスに日付(例: 4/20)を書くか、小さな印を押してください。", M, pg.top - 2.2); }
+    // 列
+    var noteW = C.cols.note ? (C.times >= 6 ? 18 : 26) : 0, noW = 10, nameW = C.times >= 6 ? 34 : 40;
+    var perW = (W - 2 * M - noW - nameW - noteW) / C.times;
+    if (perW > 40) { nameW += (perW - 40) * C.times; perW = 40; }
+    var x0 = M, ty = pg.top, rh = pg.rowH, xs = [x0, x0 + noW, x0 + noW + nameW];
+    ctx.fillStyle = col; ctx.fillRect(M, ty, W - 2 * M, HEAD_H);
+    ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    fitFont(ctx, "番号", noW - 1, 3.4, true); ctx.fillText("番号", x0 + noW / 2, ty + HEAD_H / 2);
+    fitFont(ctx, "お名前", nameW - 2, 3.8, true); ctx.fillText("お名前", xs[1] + nameW / 2, ty + HEAD_H / 2);
+    ctx.font = "2.6px " + FONT; var amtFits = C.amount && ctx.measureText(yen(C.amount)).width <= perW - 1.2;
+    C.labels.forEach(function (lb, i) {
+      var cx = xs[2] + perW * i + perW / 2;
+      fitFont(ctx, lb, perW - 2, 3.8, true); ctx.fillText(lb, cx, ty + (amtFits ? HEAD_H * 0.36 : HEAD_H / 2));
+      if (amtFits) { ctx.font = "2.6px " + FONT; ctx.fillText(yen(C.amount), cx, ty + HEAD_H * 0.74); }
+    });
+    if (noteW) { fitFont(ctx, "備考", noteW - 2, 3.8, true); ctx.fillText("備考", W - M - noteW / 2, ty + HEAD_H / 2); }
+    var y0 = ty + HEAD_H, rows = pg.rows.slice();
+    var nRows = rows.length + (C.cols.total && pg.last ? 1 : 0);
+    for (var i = 0; i < nRows; i++) {
+      var ry = y0 + rh * i, isTotal = i >= rows.length;
+      if (isTotal) { ctx.fillStyle = C.theme[1]; ctx.fillRect(M, ry, W - 2 * M, rh); }
+      ctx.fillStyle = "#222"; ctx.textBaseline = "middle";
+      if (isTotal) { ctx.textAlign = "center"; fitFont(ctx, "合計", nameW + noW - 4, Math.min(rh * 0.45, 4.6), true); ctx.fillText("合計", M + (noW + nameW) / 2, ry + rh / 2); }
+      else {
+        ctx.textAlign = "center"; ctx.font = "bold " + Math.min(rh * 0.42, 4.4) + "px " + FONT; ctx.fillText(String(pg.start + i + 1), x0 + noW / 2, ry + rh / 2);
+        if (rows[i]) { ctx.textAlign = "left"; fitFont(ctx, rows[i], nameW - 4, Math.min(rh * 0.48, 5.6), false); ctx.fillText(rows[i], xs[1] + 2, ry + rh / 2, nameW - 4); }
+        // 受け取った日(薄字)
+        ctx.fillStyle = FAINT; ctx.font = Math.min(rh * 0.28, 2.6) + "px " + FONT; ctx.textAlign = "left"; ctx.textBaseline = "top";
+        if (C.times < 6) for (var k = 0; k < C.times; k++) { var cx0 = xs[2] + perW * k; ctx.font = Math.min(rh * 0.28, 2.8) + "px " + FONT; ctx.fillStyle = "#666"; ctx.fillText("　月　日", cx0 + 0.8, ry + 0.8); }
+      }
+      var strong = !isTotal && (pg.start + i + 1) % 5 === 0;
+      line(ctx, M, ry + rh, W - M, ry + rh, strong ? "#333" : LINE, strong ? 0.4 : 0.3);
+    }
+    var yEnd = y0 + rh * nRows;
+    [xs[1], xs[2]].forEach(function (x) { line(ctx, x, ty + HEAD_H, x, yEnd, LINE, 0.3); });
+    for (var k2 = 1; k2 <= C.times; k2++) line(ctx, xs[2] + perW * k2, ty + HEAD_H, xs[2] + perW * k2, yEnd, LINE, 0.3);
+    ctx.strokeStyle = col; ctx.lineWidth = 0.5; ctx.strokeRect(M, ty, W - 2 * M, yEnd - ty);
+    credit(ctx, W, H);
+  }
+  // お知らせ。s は文字の大きさの倍率(長い文のときは小さくして1枚に収める)。描いた下端のyを返す
+  function drawOshirase(ctx, C, pg, s, dry) {
+    s = s || 1;
+    var W = pg.W, H = pg.H, col = C.theme[0], gl = groupLine(C, pg.g), x = 22, R = W - 22, y = 26, lh = 8 * s;
+    function txt(t, xx, yy, mw) { if (!dry) ctx.fillText(t, xx, yy, mw); }
+    ctx.fillStyle = "#222"; ctx.textBaseline = "alphabetic";
+    ctx.textAlign = "right"; ctx.font = (4.2 * s) + "px " + FONT; txt("令和　　年　　月　　日", R, y);
+    ctx.textAlign = "left"; y += 12 * s; var to = (gl || "会員") + "の皆さまへ"; fitFont(ctx, to, 110, 5 * s, false); txt(to, x, y);
+    if (C.issuer) { ctx.textAlign = "right"; y += 8 * s; fitFont(ctx, C.issuer, 100, 4.6 * s, false); txt(C.issuer, R, y); }
+    y += 20 * s; ctx.textAlign = "center"; ctx.fillStyle = col; var tt = (C.title ? C.title + " " : "") + "集金のお知らせ"; fitFont(ctx, tt, R - x, 8 * s, true); txt(tt, W / 2, y);
+    y += 15 * s; ctx.textAlign = "left"; ctx.fillStyle = "#222"; ctx.font = (4.6 * s) + "px " + FONT;
+    (C.body || DEF_BODY).split("\n").forEach(function (para) {
+      if (!para.trim()) { y += lh * 0.6; return; }
+      wrap(ctx, "　" + para.trim(), R - x - 4).forEach(function (ln) { txt(ln, x, y); y += lh; });
+    });
+    y += 6 * s; ctx.textAlign = "center"; ctx.font = (5 * s) + "px " + FONT; txt("記", W / 2, y); y += 13 * s;
+    var items = [];
+    var total = C.amount ? yen(C.amount) + (C.times > 1 ? "(1回分・全" + C.times + "回で合計 " + yen(C.amount * C.times) + ")" : "") : "";
+    items.push(["金額", total]);
+    items.push(["集金する日", C.date || ""]);
+    items.push(["集め方", C.how || ""]);
+    if (C.contact) items.push(["問い合わせ先", C.contact]);
+    ctx.textAlign = "left";
+    items.forEach(function (it, i) {
+      ctx.font = "bold " + (4.8 * s) + "px " + FONT; txt((i + 1) + ". " + it[0], x + 8, y);
+      ctx.font = (4.8 * s) + "px " + FONT; var ls = it[1] ? wrap(ctx, it[1], R - x - 52) : [""];
+      ls.forEach(function (ln, j) { txt(ln, x + 50, y + j * 7.5 * s); });
+      if (!it[1] && !dry) line(ctx, x + 50, y + 1, R - 8, y + 1, LINE, 0.3);
+      y += ls.length * 7.5 * s + 5 * s;
+    });
+    y += 5 * s; ctx.textAlign = "right"; ctx.font = (4.6 * s) + "px " + FONT; txt("以上", R - 4, y);
+    if (pg.cut) {
+      // 切り取って封筒に貼る部分
+      var by = Math.max(y + 16, H - 76);
+      if (!dry) {
+        line(ctx, 14, by, W - 14, by, "#888", 0.3, [2, 1.5]);
+        ctx.fillStyle = "#555"; ctx.font = "3.4px " + FONT; ctx.textAlign = "center";
+        ctx.fillText("✂ ここで切り取り、封筒に貼ってお金を入れてください。受け取ったら係が日付を書き、印を押してお返しします。", W / 2, by - 1.8, W - 28);
+        ctx.fillStyle = "#222"; ctx.textAlign = "left"; ctx.font = "bold 5.4px " + FONT; ctx.fillText((C.title ? C.title + " " : "") + "集金袋", x, by + 13, R - x - 30);
+        ctx.font = "4.6px " + FONT;
+        var per = C.times > 1 ? (C.start ? "(　　月分)" : "(　　回目分)") : "";
+        ctx.fillText("金額　　" + (C.amount ? yen(C.amount) : "　　　　　円") + per, x, by + 25);
+        ctx.fillText("お名前", x, by + 37); line(ctx, x + 18, by + 38, x + 110, by + 38, LINE, 0.3);
+        ctx.fillText("受け取った日　　月　　日", x, by + 49);
+        ctx.strokeStyle = LINE; ctx.lineWidth = 0.3; ctx.strokeRect(R - 26, by + 29, 22, 22); ctx.fillStyle = "#555"; ctx.font = "3px " + FONT; ctx.textAlign = "center"; ctx.fillText("受領印", R - 15, by + 27);
+      }
+      y = by + 52;
+    }
+    if (!dry) credit(ctx, W, H);
+    return y;
+  }
+  // お知らせの文字の倍率を決める(切り取り部分を含めて下端12mm以内に収める)
+  function fitOshirase(C, pg) {
+    var ctx = document.createElement("canvas").getContext("2d"), s = 1;
+    pg.cut = true;
+    for (var i = 0; i < 6; i++) { if (drawOshirase(ctx, C, pg, s, true) <= pg.H - 12) return s; s *= 0.9; }
+    // それでも入らないときは切り取り部分をやめる
+    pg.cut = false; pg.cutDropped = true; s = 1;
+    for (var j = 0; j < 6; j++) { if (drawOshirase(ctx, C, pg, s, true) <= pg.H - 12) return s; if (j < 5) s *= 0.9; }
+    pg.overflow = true;
+    return s;
+  }
+  function perText(C, all) {
+    if (all) { if (C.times <= 1) return ""; return C.start ? "(" + C.labels[0] + "〜" + C.labels[C.labels.length - 1] + "分)" : "(全" + C.times + "回分)"; }
+    if (C.times <= 1) return "";
+    return C.start ? "(　　月分)" : "(　　回目分)";
+  }
+  function drawRyoshu(ctx, C, pg) {
+    var W = pg.W, H = pg.H, col = C.theme[0], bh = H / 4, stubW = 50;
+    pg.items.forEach(function (it, i) {
+      var y = bh * i, amt = C.rAmount === "blank" ? 0 : C.rAmount === "all" ? C.amount * C.times : C.amount;
+      var tada = C.title ? C.title + (C.rAmount === "blank" ? "" : perText(C, C.rAmount === "all")) : "";
+      if (i) line(ctx, 6, y, W - 6, y, "#999", 0.3, [2, 1.5]);
+      line(ctx, 10 + stubW, y + 6, 10 + stubW, y + bh - 6, "#999", 0.3, [2, 1.5]);
+      // 控え
+      ctx.fillStyle = "#222"; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+      ctx.font = "bold 4px " + FONT; ctx.fillText("控え", 12, y + 12); ctx.font = "3.4px " + FONT; ctx.fillText("No. " + it.no, 12 + 14, y + 12);
+      var to = (it.name ? it.name : "　　　　") + "　様"; fitFont(ctx, to, stubW - 6, 4, false); ctx.fillText(to, 12, y + 24, stubW - 6); line(ctx, 12, y + 25.5, 8 + stubW, y + 25.5, LINE, 0.3);
+      ctx.font = "3.8px " + FONT; ctx.fillText("金額 " + (amt ? yen(amt) : "　　　　　円"), 12, y + 36, stubW - 6);
+      var tt = "但し " + (tada || "　　　　"); fitFont(ctx, tt, stubW - 6, 3.4, false); ctx.fillText(tt, 12, y + 46, stubW - 6);
+      ctx.font = "3.4px " + FONT; ctx.fillText("　　年　　月　　日", 12, y + 56);
+      // 本体
+      var x = 16 + stubW, R = W - 12;
+      ctx.textAlign = "center"; ctx.fillStyle = col; ctx.font = "bold 7px " + FONT; ctx.fillText("領 収 書", (x + R) / 2, y + 14);
+      ctx.textAlign = "right"; ctx.fillStyle = "#222"; ctx.font = "3.4px " + FONT; ctx.fillText("No. " + it.no, R, y + 10);
+      ctx.fillText("令和　　年　　月　　日", R, y + 18);
+      ctx.textAlign = "left"; var nm = (it.name || "　　　　　　") + "　様"; fitFont(ctx, nm, 90, 5.4, false); ctx.fillText(nm, x, y + 28, 90); line(ctx, x, y + 30, x + 92, y + 30, "#333", 0.35);
+      ctx.fillStyle = C.theme[1]; ctx.fillRect(x, y + 34, 92, 13); ctx.strokeStyle = "#333"; ctx.lineWidth = 0.35; ctx.strokeRect(x, y + 34, 92, 13);
+      ctx.fillStyle = "#222"; ctx.font = "bold 6.2px " + FONT; ctx.textAlign = "center"; ctx.fillText(amt ? "金 " + amt.toLocaleString("ja-JP") + "円也" : "金　　　　　　円也", x + 46, y + 42.8, 88);
+      ctx.textAlign = "left"; var td = "但し " + (tada || "　　　　　　　　") + "として"; fitFont(ctx, td, 92, 3.8, false); ctx.fillText(td, x, y + 54, 92);
+      ctx.font = "3.4px " + FONT; ctx.fillText("上記、正に領収いたしました。", x, y + 61);
+      if (C.issuer) { ctx.textAlign = "right"; fitFont(ctx, C.issuer, R - 19 - (x + 54), 4, false); ctx.fillText(C.issuer, R - 19, y + 61, R - 19 - (x + 54)); }
+      else line(ctx, x + 56, y + 61.5, R - 19, y + 61.5, LINE, 0.3);
+      ctx.strokeStyle = LINE; ctx.lineWidth = 0.3; ctx.strokeRect(R - 16, y + 48, 15, 15); ctx.fillStyle = "#555"; ctx.font = "2.6px " + FONT; ctx.textAlign = "center"; ctx.fillText("印", R - 8.5, y + 56.5);
+    });
+    credit(ctx, W, H);
+  }
+  function drawPage(ctx, C, L, pi, k) {
+    var pg = L.pages[pi];
+    ctx.save(); ctx.scale(k, k);
+    ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, pg.W, pg.H);
+    if (pg.kind === "hyo") drawHyo(ctx, C, pg); else if (pg.kind === "oshirase") drawOshirase(ctx, C, pg, pg.s, false); else drawRyoshu(ctx, C, pg);
+    ctx.restore();
+  }
+  function render(C, L, pi, dpi) {
+    var pg = L.pages[pi], k = dpi / 25.4, c = document.createElement("canvas");
+    c.width = Math.round(pg.W * k); c.height = Math.round(pg.H * k);
+    var ctx = c.getContext("2d"); if (!ctx) return null;
+    drawPage(ctx, C, L, pi, k);
+    return c;
+  }
+
+  // ===== 画面 =====
+  var pvCanvas = null, lastC = null, lastL = null;
+  var KIND = { hyo: "集金表", oshirase: "集金のお知らせ", ryoshu: "領収書" };
+  function pageName(C, pg, i) {
+    if (pg.kind === "ryoshu") return (i + 1) + ". 領収書 No." + pg.items[0].no + "〜" + pg.items[pg.items.length - 1].no;
+    var gl = groupLine(C, pg.g);
+    return (i + 1) + ". " + (C.groups.length > 1 && gl ? gl + " " : "") + KIND[pg.kind] + (pg.of > 1 ? " " + (pg.idx + 1) + "/" + pg.of + "ページ" : "");
+  }
+  function refresh() {
+    var C = conf(), L = layout(C);
+    lastC = C; lastL = L;
+    $("hyoOpts").classList.toggle("hidden", C.mode !== "hyo");
+    $("noticeOpts").classList.toggle("hidden", C.mode !== "oshirase");
+    if ($("ryoshuOpts")) $("ryoshuOpts").classList.toggle("hidden", C.mode !== "ryoshu");
+    $("blankField").classList.toggle("hidden", C.mode === "oshirase");
+    $("contactField").classList.toggle("hidden", C.mode !== "oshirase");
+    var ps = $("inPage"), cur = +ps.value || 0; ps.textContent = "";
+    L.pages.forEach(function (pg, i) { var o = document.createElement("option"); o.value = i; o.textContent = pageName(C, pg, i); ps.appendChild(o); });
+    cur = Math.min(cur, L.pages.length - 1); ps.value = cur;
+    $("pageField").classList.toggle("hidden", L.pages.length < 2);
+    if (!pvCanvas) { pvCanvas = document.createElement("canvas"); pvCanvas.setAttribute("role", "img"); $("pv").appendChild(pvCanvas); }
+    var pg = L.pages[cur], k = 900 / pg.W, w = Math.round(pg.W * k), h = Math.round(pg.H * k);
+    if (pvCanvas.width !== w || pvCanvas.height !== h) { pvCanvas.width = w; pvCanvas.height = h; }
+    drawPage(pvCanvas.getContext("2d"), C, L, cur, k);
+    var total = 0; C.groups.forEach(function (g) { total += g.names.length; });
+    pvCanvas.setAttribute("aria-label", KIND[C.mode] + "の見本(" + (cur + 1) + "枚目)");
+    if (C.mode === "oshirase") setSt("sumNote", "お知らせは" + (C.groups.length > 1 ? "班ごとに1枚(全" + L.pages.length + "枚)" : "1枚") + "です。配る数は、印刷画面の部数やコピーで増やしてください。", false); else setSt("sumNote", (C.blank ? "名前を入れていないので、手書き用の空欄(" + total + (C.mode === "ryoshu" ? "枚分" : "行") + ")です。" : "名前" + total + "件" + (C.groups.length > 1 ? "・" + C.groups.length + "班" : "") + "。") + KIND[C.mode] + "・A4" + (pg.W > pg.H ? "横" : "縦") + "の紙" + L.pages.length + "枚", false);
+    var warn = [];
+    C.cut.forEach(function (c) { warn.push((c.g ? "「" + c.g + "」の" : "") + (MAXN + 1) + "件目の「" + c.first + "」から後ろ(" + c.n + "件)は入っていません(" + (EDITION === "full" ? "1つの班は60件まで" : "無料版は20件まで。買い切り版は60件まで") + ")"); });
+    if (C.gcut) warn.push(EDITION === "full" ? "班は30班までです(" + (C.gcutName ? "「" + C.gcutName + "」から" : "31班目から") + "後ろは入りません)" : "無料版は1つの班だけです(「■」の見出しで分けた2つ目の班からは入りません。買い切り版は30班まで)");
+    if (C.empty.length) warn.push("名前のない班の見出し(" + C.empty.slice(0, 3).join("・") + ")は入れていません");
+    if (C.long) warn.push("20文字をこえる名前は、20文字で切っています");
+    if (C.badAmount) warn.push("金額は数字だけで入れてください(1,000万円未満)。今は手書きの欄にしています");
+    if (C.mode === "ryoshu" && C.rAmount !== "blank" && !C.amount) warn.push("金額が空欄なので、領収書の金額は手書きの欄になります");
+    if (C.zeroAmount) warn.push("金額が0円なので、金額を入れていないときと同じ扱いにしています");
+    if (C.mode === "ryoshu" && !C.issuer) warn.push("領収書には、出す人(会の名前・係)を入れてください(空欄だと手書きの線になります)");
+    if (C.mode === "ryoshu" && C.badNo) warn.push("始めの番号は1〜99999の数字で入れてください(今は1から)");
+    if (C.mode === "ryoshu" && C.noShift) warn.push("最後の番号が99999をこえないよう、始めの番号を" + C.no + "にしています");
+    if (C.mode === "oshirase" && L.pages.some(function (p) { return p.overflow; })) warn.push("本文の行が多すぎて、1枚に入りきりません。本文を短くしてください");
+    else if (C.mode === "oshirase" && L.pages.some(function (p) { return p.cutDropped; })) warn.push("文が長くて1枚に入らないので、切り取る集金袋の部分を外しました。本文を短くすると入ります");
+    var ah = $("amtHint"); ah.textContent = C.badAmount ? "数字だけで入れてください(例: 500)。1,000万円未満です" : "空欄なら、お知らせなどの金額は手書きの欄になります(集金表には金額が入りません)"; ah.style.color = C.badAmount ? "var(--ng)" : ""; $("inAmount").setAttribute("aria-invalid", C.badAmount ? "true" : "false");
+    setSt("warnNote", warn.join("。") + (warn.length ? "。" : ""), C.cut.length > 0 || C.gcut > 0 || C.badAmount);
+    save();
+  }
+
+  // ===== 自動保存 =====
+  var FIELDS = ["inNames", "inTitle", "inGroup", "inAmount", "inTimes", "inStart", "inBlank", "inDate", "inHow", "inBody", "inIssuer", "inContact", "inNo", "inRAmount", "inColor"], CHECKS = ["colTotal", "colNote"];
+  var DEFAULTS = { inNames: "", inTitle: "", inGroup: "", inAmount: "", inTimes: "12", inStart: "4", inBlank: "15", inDate: "", inHow: "", inBody: DEF_BODY, inIssuer: "", inContact: "", inNo: "1", inRAmount: "one", inColor: "mono", colTotal: true, colNote: true };
+  var LIMITS = { inNames: 20000, inBody: 200, inHow: 40, inContact: 40, inTitle: 24, inAmount: 9, inNo: 5 };
+  function save() { try { var o = {}; FIELDS.forEach(function (id) { if ($(id)) o[id] = $(id).value; }); CHECKS.forEach(function (id) { o[id] = $(id).checked; }); o.mode = modeOf(); localStorage.setItem(STORE, JSON.stringify(o)); } catch (e) {} }
+  function setMode(m) { var r = document.querySelector('input[name="mode"][value="' + m + '"]') || document.querySelector('input[name="mode"][value="hyo"]'); r.checked = true; }
+  function setDefaults() { FIELDS.forEach(function (id) { if ($(id)) $(id).value = DEFAULTS[id]; }); CHECKS.forEach(function (id) { $(id).checked = DEFAULTS[id]; }); setMode("hyo"); }
+  function load() {
+    try {
+      var o = JSON.parse(localStorage.getItem(STORE) || "null"); if (!o || typeof o !== "object") return;
+      FIELDS.forEach(function (id) { var v = o[id], el = $(id); if (typeof v !== "string" || !el) return; if (el.tagName === "SELECT") { if ([].some.call(el.options, function (op) { return op.value === v; })) el.value = v; } else el.value = v.slice(0, LIMITS[id] || 30); });
+      CHECKS.forEach(function (id) { if (typeof o[id] === "boolean") $(id).checked = o[id]; });
+      if (o.mode === "hyo" || o.mode === "oshirase" || o.mode === "ryoshu") setMode(o.mode);
+    } catch (e) {}
+  }
+  var timer = null;
+  $("clearBtn").addEventListener("click", function () {
+    if (!window.confirm("入力した名前・集金の名前・金額・お知らせの文・出す人などを消して、最初の状態に戻しますか?(このブラウザに自動で保存した内容も消えます)")) return;
+    clearTimeout(timer); timer = null;
+    setDefaults(); refresh();
+    try { localStorage.removeItem(STORE); } catch (e) {}
+    setSt("outSt", "消しました。保存した画像は、ダウンロードしたフォルダに残っています。");
+  });
+
+  // ===== イベント =====
+  function later() { clearTimeout(timer); timer = setTimeout(function () { timer = null; refresh(); }, 300); }
+  function flush() { if (timer) { clearTimeout(timer); timer = null; refresh(); } }
+  ["inTimes", "inStart", "inBlank", "inRAmount", "inColor", "inPage", "colTotal", "colNote"].forEach(function (id) { if ($(id)) $(id).addEventListener("change", refresh); });
+  [].forEach.call(document.querySelectorAll('input[name="mode"]'), function (r) { r.addEventListener("change", function () { $("inPage").value = "0"; refresh(); }); });
+  ["inNames", "inTitle", "inGroup", "inAmount", "inDate", "inHow", "inBody", "inIssuer", "inContact", "inNo"].forEach(function (id) { if ($(id)) $(id).addEventListener("input", later); });
+
+  // ===== 印刷・保存 =====
+  function toBlob(c) { return new Promise(function (res) { c.toBlob(function (b) { res(b); }, "image/png"); }); }
+  function download(blob, name) {
+    var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+  }
+  function renderAll(C, L, dpi) {
+    var out = [], p = Promise.resolve();
+    L.pages.forEach(function (_, i) { p = p.then(function () { var c = render(C, L, i, dpi); if (!c) throw new Error("canvas"); return toBlob(c).then(function (b) { c.width = c.height = 0; if (!b) throw new Error("blob"); out.push(b); }); }); });
+    return p.then(function () { return out; });
+  }
+  function stats(C, pages) {
+    var n = 0; if (!C.blank) C.groups.forEach(function (g) { n += g.names.length; });
+    return { mode: C.mode, n: n, groups: C.blank ? 0 : C.groups.length, times: C.times, amount: C.amount ? 1 : 0, pages: pages };
+  }
+  var busyFlag = false, printUrls = [];
+  function clearPrint() { printUrls.forEach(function (u) { URL.revokeObjectURL(u); }); printUrls = []; $("printArea").textContent = ""; document.body.classList.remove("printing"); }
+  $("printBtn").addEventListener("click", function () {
+    if (busyFlag) return;
+    flush();
+    var C = lastC, L = lastL, pg0 = L.pages[0];
+    busyFlag = true; clearPrint();
+    $("pageStyle").textContent = "@page { size: A4 " + (pg0.W > pg0.H ? "landscape" : "portrait") + "; margin: 0; }";
+    setSt("outSt", "印刷用の画像を作っています…");
+    renderAll(C, L, 250).then(function (blobs) {
+      return Promise.all(blobs.map(function (b) {
+        return new Promise(function (res, rej) { var u = URL.createObjectURL(b), im = new Image(); printUrls.push(u); im.style.width = (pg0.W - 0.3) + "mm"; im.style.height = (pg0.H - 0.3) + "mm"; im.onload = res; im.onerror = function () { rej(new Error("img")); }; im.alt = ""; im.src = u; $("printArea").appendChild(im); });
+      })).then(function () { return blobs.length; });
+    }).then(function (cnt) {
+      document.body.classList.add("printing");
+      setSt("outSt", "印刷画面を開きました(紙" + cnt + "枚)。パソコンでは倍率を「100%」に。" + (pg0.W > pg0.H ? "用紙は横向きです。" : ""));
+      track("shukin_print", stats(C, cnt));
+      setTimeout(function () { window.print(); }, 50);
+    }).catch(function () { clearPrint(); setSt("outSt", "印刷用の画像を作れませんでした。ページを読み込み直して、もう一度お試しください。", true); }).then(function () { busyFlag = false; });
+  });
+  window.addEventListener("afterprint", clearPrint);
+  $("bigBtn").addEventListener("click", function () {
+    flush();
+    var c = render(lastC, lastL, +$("inPage").value || 0, 150); if (!c) return;
+    var w = window.open("", "_blank");
+    if (!w) { setSt("outSt", "新しいタブを開けませんでした(ポップアップがブロックされました)。「画像で保存」をお使いください。", true); return; }
+    toBlob(c).then(function (b) {
+      if (!b) { w.close(); return; }
+      var u = URL.createObjectURL(b);
+      w.location.href = u;
+      setTimeout(function () { URL.revokeObjectURL(u); }, 60000);
+    });
+  });
+  var saveMany = function (blobs, names) {
+    var p = Promise.resolve();
+    blobs.forEach(function (b, i) { p = p.then(function () { download(b, names[i]); return new Promise(function (r) { setTimeout(r, 700); }); }); });
+    return p;
+  };
+  
+  function safeName(s) {
+    return Array.from(String(s).replace(/[\/\\:*?"<>|]/g, "")).filter(function (ch) { var cp = ch.codePointAt(0); return cp >= 32 && cp !== 0x7f && !(cp >= 0x202a && cp <= 0x202e) && !(cp >= 0x2066 && cp <= 0x2069); }).join("").replace(/[. ]+$/, "") || "集金表";
+  }
+  $("pngBtn").addEventListener("click", function () {
+    if (busyFlag) return;
+    flush();
+    var C = lastC, L = lastL, digits = Math.max(2, String(L.pages.length).length);
+    var names = L.pages.map(function (pg, i) { var gl = pg.g ? groupLine(C, pg.g) : ""; return safeName((gl ? gl + "_" : "") + C.title + "_" + KIND[pg.kind] + (pg.of > 1 ? "_" + (pg.idx + 1) : "")) + (L.pages.length > 1 ? "_" + String(i + 1).padStart(digits, "0") : "") + ".png"; });
+    var zipName = safeName(C.title + "_" + KIND[C.mode]) + "_紙" + L.pages.length + "枚.zip";
+    busyFlag = true; setSt("outSt", "画像を作っています…");
+    renderAll(C, L, 250).then(function (blobs) {
+      var phone = window.matchMedia && matchMedia("(pointer:coarse)").matches, files = null;
+      track("shukin_save", stats(C, blobs.length));
+      try { files = blobs.map(function (b, i) { return new File([b], names[i], { type: "image/png" }); }); } catch (e) {}
+      if (phone && files && navigator.canShare && navigator.canShare({ files: files })) {
+        setSt("outSt", "共有メニューが開きます。「画像を保存」や「ダウンロード」を選んでください。");
+        return navigator.share({ files: files }).then(function () { setSt("outSt", "完了しました。"); }, function (err) {
+          if (err && err.name === "AbortError") { setSt("outSt", "共有をやめました。もう一度押すと保存できます。"); return; }
+          return saveMany(blobs, names, zipName).then(function () { setSt("outSt", "保存しました。"); });
+        });
+      }
+      return saveMany(blobs, names, zipName).then(function () { setSt("outSt", (blobs.length > 1 ? blobs.length + "枚の画像を" : "画像を") + "保存しました。"); });
+    }).catch(function () { setSt("outSt", "画像を作れませんでした。ページを読み込み直して、もう一度お試しください。", true); }).then(function () { busyFlag = false; });
+  });
+
+  function faq(id, q, a) { var li = $(id), st = document.createElement("strong"); st.textContent = q; li.textContent = ""; li.appendChild(st); li.appendChild(document.createTextNode(" " + a)); }
+  if (EDITION === "full") {
+    $("pro-section").classList.add("hidden");
+    $("issuerHint").textContent = "集金表の「集金係」、お知らせ、領収書に入ります";
+    $("titleHint").textContent = "空欄なら見出しは「集金表」「集金のお知らせ」だけになり、領収書の但し書きは手書きになります";
+    [].forEach.call($("inBlank").options, function (o) { o.textContent = o.value + "(領収書は" + Math.ceil(o.value / 4) * 4 + "枚)"; });
+    $("inGroup").placeholder = "例: さくら町内会";
+    $("inGroup").nextElementSibling.textContent = "空欄でもかまいません。班は名簿の「■1班」で分けます";
+    faq("faqPhone", "スマホで印刷するには?", "このファイルはパソコン用です。パソコンで「画像で保存」した画像をスマホに送れば、コンビニのプリントのアプリから印刷できます。");
+    faq("faqCount", "何件(何世帯)まで入る?", "1つの班60件まで、30班までです。1枚に入りきらないときは、自動で次のページに分けます。班を分けるときは、班ごとに名前の前に「■1班」「■2班」のような行を入れます(■は「しかく」と打って変換)。");
+  } else {
+    faq("faqPhone", "スマホだけで作れる?", "作れます。スマホで作って「画像で保存」し、コンビニのプリントのアプリや、プリンターのアプリから印刷してください。");
+    faq("faqCount", "何件(何世帯)まで入る?", "無料版は20件までで、A4の1枚に入ります。PTAの1クラスや部活など20件(20人)をこえるときは、2回に分けて作るか、買い切り版(60件まで)をお使いください。");
+    $("privacyNote").innerHTML = '入力した内容はどこにも送信されません(すべてこのブラウザの中で処理し、このブラウザにだけ自動で保存します)。このページでは利用状況の把握のためにアクセス解析(Google Analytics)を使っています(入力した内容は含みません)。<a href="https://policies.google.com/technologies/partner-sites?hl=ja" target="_blank" rel="noopener">Googleによるデータの使用について</a>';
+  }
+  $("nmHint").textContent = (EDITION === "full" ? "1つの班60件まで。班を分けるときは、班ごとに名前の前に「■1班」「■2班」のような行を入れます(■は「しかく」と打って変換。30班まで)。" : "20件まで(買い切り版は60件まで)。") + "1行20文字まで。名字だけ・部屋番号だけでもかまいません。";
+  setDefaults();
+  load();
+  refresh();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+})();
+</script>
+<!--UPSELL_JS_START-->
+<script>
+(function () {
+  "use strict";
+  var q = new URLSearchParams(location.search);
+  if (q.get("obs") === "1" || document.documentElement.classList.contains("obs")) return;
+  // 小さな案内(トースト)は、買い切り版がパソコン向けなので、マウス操作の広い画面でだけ出す
+  var pc = !!(window.matchMedia && matchMedia("(pointer:fine) and (min-width:720px)").matches);
+  var buy = document.getElementById("buyLink");
+  var pro = document.getElementById("pro-section");
+  if (!buy || !pro) return;
+  var FEATS = [];
+  var path = location.pathname.replace(/index\.html$/, "");
+  var KEY_CLOSED = "upsell_closed_until:" + path, KEY_SHOWN = "upsell_shown:" + path;
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+  function sess(k, v) { try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) { return null; } }
+  function gtagEv(name, p) { if (!window.dataLayer) return; (function () { window.dataLayer.push(arguments); })("event", name, p || {}); }
+
+  var shown = false;
+  function blocked() {
+    if (shown || sess(KEY_SHOWN) === "1") return true;
+    var until = Number(store(KEY_CLOSED) || 0);
+    return until && Date.now() < until;
+  }
+  function feats() {
+    if (FEATS.length) return FEATS;
+    var out = [];
+    var lis = pro.querySelectorAll(".feat-list li");
+    for (var i = 0; i < lis.length && out.length < 3; i++) {
+      var all = lis[i].textContent.replace(/\s+/g, " ").trim();
+      if (/スマホ|HTMLファイル|パソコンで使う/.test(all)) continue;
+      var st = lis[i].querySelectorAll("strong");
+      var t = st.length === 1 ? st[0].textContent : all.split(/[::。]/)[0];
+      t = t.replace(/[((][^()()]*[))]/g, "").replace(/\s+/g, " ").trim();
+      if (t.length > 40) t = t.slice(0, 39) + "…";
+      if (t) out.push(t);
+    }
+    return out;
+  }
+  // 「〜してください」「できません」など、失敗の表示が出ていたら案内しない
+  function failed() {
+    var els = document.querySelectorAll('[role="status"], [role="alert"], [aria-live]');
+    for (var i = 0; i < els.length; i++) {
+      if (pro.contains(els[i]) || !els[i].offsetParent) continue;
+      if (/ください|できません|できませんでした|失敗|ありません|エラー/.test(els[i].textContent)) return true;
+    }
+    return false;
+  }
+  function proVisible() {
+    var r = pro.getBoundingClientRect();
+    return r.top < innerHeight && r.bottom > 0;
+  }
+  function show(trigger) {
+    if (!pc || blocked() || (trigger === "action" && failed()) || proVisible()) return;
+    var list = feats();
+    if (!list.length) return;
+    shown = true;
+    sess(KEY_SHOWN, "1");
+    var box = document.createElement("aside");
+    box.className = "upsell-toast";
+    box.setAttribute("aria-label", "買い切り版のご案内");
+    box.setAttribute("aria-live", "polite");
+    document.body.appendChild(box);
+    var p = document.createElement("p");
+    p.textContent = trigger === "limit"
+      ? "この先は買い切り版の機能です。パソコン用の買い切り版(¥100・税込)なら:"
+      : "うまくできましたか? パソコン用の買い切り版(¥100・税込)なら、さらに:";
+    var ul = document.createElement("ul");
+    list.forEach(function (t) { var li = document.createElement("li"); li.textContent = t; ul.appendChild(li); });
+    var a = document.createElement("a");
+    a.className = "upsell-go";
+    a.id = "upsellToastLink";
+    a.href = buy.href;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.textContent = "BOOTHで見る(新しいタブ)";
+    var bg = getComputedStyle(buy).backgroundColor;
+    if (bg && !/rgba?\(0, 0, 0, 0\)|transparent/.test(bg)) a.style.background = bg;
+    var x = document.createElement("button");
+    x.type = "button";
+    x.className = "upsell-x";
+    x.setAttribute("aria-label", "この案内を閉じる");
+    x.textContent = "×";
+    function close(remember) {
+      if (box.parentNode) box.parentNode.removeChild(box);
+      document.removeEventListener("keydown", onKey);
+      if (remember) store(KEY_CLOSED, String(Date.now() + 7 * 864e5));
+    }
+    // Escはページ側の操作(選択解除など)にも使われるので、案内の中にフォーカスがある時だけ閉じる
+    function onKey(e) { if (e.key === "Escape" && box.contains(document.activeElement)) close(true); }
+    x.addEventListener("click", function () { close(true); });
+    a.addEventListener("click", function () { setTimeout(function () { close(false); }, 0); });
+    document.addEventListener("keydown", onKey);
+    setTimeout(function () {
+      var note = document.createElement("small");
+      note.className = "upsell-note";
+      note.textContent = "スマホではファイルを開けない機種があります";
+      box.appendChild(x); box.appendChild(p); box.appendChild(ul); box.appendChild(a); box.appendChild(note);
+    }, 50);
+    gtagEv("upsell_show", { trigger: trigger });
+  }
+
+  // 保存・コピー・印刷・書き出しを押した直後(結果を受け取れたタイミング)
+  var OK = /保存|コピー|印刷|書き出|ダウンロード|共有|PDF/;
+  var NG = /読み込|リセット|消|削除|このブラウザに保存|確認|イメージを見る|戻/;
+  document.addEventListener("click", function (e) {
+    var el = e.target && e.target.closest ? e.target.closest("button, a[download], input[type=button], input[type=submit]") : null;
+    if (!el || el.closest("#pro-section, .upsell-toast, #anshin")) return;
+    var label = (el.textContent || el.value || "").replace(/\s+/g, " ");
+    if (!OK.test(label) || NG.test(label)) return;
+    setTimeout(function () { show("action"); }, 1500);
+  }, true);
+
+  // 無料版の上限まわり
+  // (1) ページが出す「買い切り版」の一文に、購入欄へのリンクを足す(スマホでも)。🔒のタブは薄く表示されているので入れない
+  // (2) 案内(パソコンのみ)は、はっきりした合図のときだけ出す: 🔒のクリック・買い切り版にふれたalert・
+  //     初めて出た「〜まで/のみ/以降/入っていません」の上限の一文(計算のたびに出る誘導文や、同じ文の描き直しでは出さない)
+  var SKIP = "#pro-section, .upsell-toast, .upsell-top, #anshin, a, button, label, select, option, h1, h2, h3, .badge, header, footer, nav, textarea, pre, code, [contenteditable], svg";
+  var LIMIT = /まで|のみ|以降|入っていません/;
+  var seenText = {}, ready = false;
+  function goPro(e) {
+    if (e) e.preventDefault();
+    pro.setAttribute("tabindex", "-1");
+    pro.scrollIntoView({ behavior: "smooth", block: "start" });
+    pro.focus({ preventScroll: true });
+  }
+  function linkify(root, deep) {
+    var limitHit = false;
+    var els = root.matches("p, div, span, li") ? [root] : [];
+    if (deep) els = els.concat([].slice.call(root.querySelectorAll("p, div, span, li")));
+    els.forEach(function (el) {
+      if (el.closest(SKIP) || el.closest('[role="radio"], [role="option"], [role="tab"], [role="button"], [tabindex]:not([tabindex="-1"])') || el.querySelector("a, button, p, div, li, input, label")) return;
+      // 選択肢の「○○(買い切り版)」ではなく、文として買い切り版にふれている要素だけ
+      var own = "";
+      for (var n = el.firstChild; n; n = n.nodeType === 1 && n.className === "upsell-inline" ? null : n.nextSibling) if (n.nodeType === 3) own += n.nodeValue;
+      own = own.trim();
+      if (own.indexOf("買い切り版") < 0 || /[((]買い切り版[))]$/.test(own) || /^🔒/.test(own)) return;
+      var key = own.replace(/\d+/g, "#");
+      if (ready && !seenText[key] && LIMIT.test(own) && !el.closest(".teaser, #teaser, [id$=teaser], #tz")) limitHit = true;
+      seenText[key] = 1;
+      if (el.querySelector(".upsell-inline")) return;
+      var a = document.createElement("a");
+      a.className = "upsell-inline";
+      a.href = "#pro-section";
+      a.setAttribute("aria-label", "くわしく:買い切り版の説明へ移動");
+      a.textContent = "くわしく";
+      var ar = document.createElement("span");
+      ar.setAttribute("aria-hidden", "true");
+      ar.textContent = " ↓";
+      a.appendChild(ar);
+      a.addEventListener("click", goPro);
+      el.appendChild(document.createTextNode(" "));
+      el.appendChild(a);
+    });
+    return limitHit;
+  }
+  linkify(document.body, true);
+  setTimeout(function () { ready = true; }, 1500);
+  var topLink = document.querySelector("#upsellTop a");
+  if (topLink) topLink.addEventListener("click", goPro);
+  new MutationObserver(function (ms) {
+    // 変わったところだけを調べる(足された要素はその中も、文字の変更は親要素だけ)
+    var hit = false, done = new Set();
+    function check(t, deep) {
+      if (!t || t.nodeType !== 1 || done.has(t) || t.closest(".upsell-toast")) return;
+      done.add(t);
+      if (linkify(t, deep)) hit = true;
+    }
+    ms.forEach(function (m) {
+      if (m.type === "characterData") { check(m.target.parentNode, false); return; }
+      check(m.target, false);
+      for (var i = 0; i < m.addedNodes.length; i++) if (m.addedNodes[i].nodeType === 1) check(m.addedNodes[i], true);
+    });
+    if (hit) setTimeout(function () { show("limit"); }, 800);
+  }).observe(document.body, { childList: true, subtree: true, characterData: true });
+  document.addEventListener("click", function (e) {
+    var el = e.target && e.target.closest ? e.target.closest("button, div, span, li") : null;
+    var first = el && el.firstChild && el.firstChild.nodeType === 3 ? el.firstChild.nodeValue : "";
+    if (!/^\s*🔒/.test(first) || e.target.closest("#pro-section")) return;
+    if (pc) setTimeout(function () { show("limit"); }, 300); else goPro();
+  }, true);
+  var origAlert = window.alert;
+  window.alert = function (msg) {
+    var r = origAlert.apply(window, arguments);
+    if (/買い切り版/.test(String(msg))) setTimeout(function () { show("limit"); }, 300);
+    return r;
+  };
+})();
+</script>
+<!--UPSELL_JS_END-->
+</body>
+</html>
